@@ -296,3 +296,442 @@ h1, h2, h3, h4, h5, h6 {
 * {
     box-sizing: border-box;
 }
+
+/* Header Styles */
+.header {
+    background-color: var(--color-dark);
+    color: var(--color-white);
+    padding: 20px 0;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    margin-top: 20px;
+}
+
+.header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--container-padding-x);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Logo Section */
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 40px;
+}
+
+/* Navigation */
+.header-nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* Navigation rectangle background */
+.nav-list {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 30px 15px;
+
+    list-style: none;
+    background-color: var(--color-dark-alt);
+    border-radius: 8px;
+    height: 50px;
+}
+
+.nav-link {
+    color: var(--color-white);
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 200;
+    padding: 10px 15px;
+    border-radius: 4px;
+    transition: all var(--transition-duration);
+}
+
+.nav-link:hover {
+    color: var(--color-accent);
+}
+
+.nav-link.active {
+    background-color: var(--color-dark);
+    color: var(--color-white);
+    width: 84px;
+    height: 41px;
+
+    /* Чтобы flex‑контейнер не растягивал её */
+    flex-shrink: 0;
+
+    /* Центрируем текст по вертикали и горизонтали */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Сбрасываем стандартные паддинги, если они мешают */
+    padding: 0;
+
+}
+
+
+
+/* Right Icons */
+.header-right {
+    display: flex;
+    gap: 15px;
+}
+
+.icon-btn {
+    background-color: var(--color-dark-alt);
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-duration);
+}
+
+.icon-btn:hover {
+    background-color: var(--color-accent);
+}
+
+.icon-btn img {
+    width: 30px;
+    height: 30px;
+    filter: brightness(0) invert(1); /* Make icons white */
+}
+
+/* Hamburger Menu (Mobile) */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-white);
+    transition: all var(--transition-duration);
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-list {
+        padding: 10px;
+        height: auto;
+        flex-direction: column;
+    }
+
+    .header-nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: transparent;
+        padding: 20px;
+        display: none;
+    }
+
+    .header-nav.active {
+        display: block;
+    }
+
+    .nav-link {
+        padding: 15px;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+
+/* 1) Скрываем меню и показываем гамбургер на мобиле */
+@media (max-width: 768px) {
+    /* прячем сам <nav> */
+    .header-nav {
+        display: none;
+    }
+    /* а гамбургер наоборот показываем */
+    .hamburger {
+        display: flex;
+    }
+    /* иконки справа немного уменьшим */
+    .header-right .icon-btn {
+        width: 48px;
+        height: 48px;
+    }
+}
+
+/* 2) Когда меню открыто (добавлен класс .active) — показываем вертикально */
+.header-nav.active {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-dark-alt);
+    padding: 10px 0;
+}
+.header-nav.active .nav-list {
+    flex-direction: column;
+    gap: 0;
+}
+.header-nav.active .nav-link {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    text-align: left;
+}
+
+/* 3) Немного донастроек для ультра‑узких экранов */
+@media (max-width: 400px) {
+    /* логотип чуть меньше */
+    .header-left img {
+        height: 32px;
+    }
+    /* иконки тоже чуть меньше */
+    .header-right .icon-btn {
+        width: 40px;
+        height: 40px;
+    }
+    /* убираем внутренние отступы у контейнера */
+    .header-inner {
+        padding: 0 10px;
+    }
+}
+
+/* На мобильных экранах (≤768px) активный пункт меню растягиваем на всю ширину */
+@media (max-width: 768px) {
+    /* когда раскрыто мобильное меню */
+    .header-nav.active {
+        background-color: var(--color-dark-alt);
+    }
+
+    /* убираем фиксированную ширину/высоту */
+    .header-nav.active .nav-link.active {
+        width: 100% !important;    /* растянуть на 100% */
+        height: auto  !important;   /* авто‑высота под контент */
+        padding: 12px 16px !important; /* уютные внутренние отступы */
+        margin: 0 !important;       /* сбросим все внешние отступы */
+        border-radius: 4px;         /* скругление, как у остальных пунктов */
+        display: block;             /* растянуть блоком */
+        text-align: center;         /* центрируем текст */
+        box-sizing: border-box;     /* чтобы padding не «выпирал» наружу */
+    }
+}
+
+@media (min-width: 768px) {
+    .header-right {
+        gap: 32px;
+    }
+    .header-nav {
+        margin-right: 32px;
+    }
+}
+
+/* Enhanced right icons responsiveness */
+
+/* Base styles for header-right already exist in your code */
+.header-right {
+    display: flex;
+    gap: 15px;
+}
+
+/* Progressive enhancements for different screen sizes */
+
+/* Medium screens (tablets) */
+@media (max-width: 768px) {
+    .header-right {
+        gap: 10px; /* Reduce spacing between icons */
+    }
+
+    .icon-btn {
+        width: 48px;
+        height: 48px;
+        border-radius: 8px; /* Slightly reduce the border radius */
+    }
+
+    .icon-btn img {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+/* Small screens (small tablets and large phones) */
+@media (max-width: 576px) {
+    .header-right {
+        gap: 8px; /* Further reduce spacing */
+    }
+
+    .icon-btn {
+        width: 44px;
+        height: 44px;
+        border-radius: 6px;
+    }
+
+    .icon-btn img {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+/* Extra small screens (most phones) */
+@media (max-width: 400px) {
+    .header-right {
+        gap: 6px; /* Minimal spacing for very small screens */
+    }
+
+    .icon-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 6px;
+    }
+
+    .icon-btn img {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* Optional: Condensed layout for extremely small screens */
+@media (max-width: 320px) {
+    .header-right {
+        position: relative;
+        right: -5px; /* Slight negative margin effect */
+    }
+
+    .icon-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 5px;
+    }
+
+    .icon-btn img {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/* Fix for responsive header to prevent icons from disappearing */
+
+/* Adjust overall header layout for smaller screens */
+@media (max-width: 992px) {
+    .header-inner {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    /* Make logo smaller on smaller screens */
+    .header-left .logo-img {
+        height: 32px;
+    }
+
+    /* Ensure navigation takes full width on medium-small screens */
+    .header-nav {
+        order: 3;
+        width: 100%;
+        margin-top: 15px;
+        margin-right: 0;
+    }
+
+    /* Keep the right icons visible */
+    .header-right {
+        order: 2;
+        gap: 8px;
+    }
+}
+
+/* Further adjustments for mobile screens */
+@media (max-width: 768px) {
+    /* Remove the margin-top when menu is collapsed */
+    .header-nav {
+        margin-top: 0;
+    }
+
+    /* Make header elements more compact */
+    .header-inner {
+        padding: 0 10px;
+    }
+
+    /* Reduce icon size but keep them visible */
+    .icon-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 6px;
+    }
+
+    .icon-btn img {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* Extremely small screens adjustments */
+@media (max-width: 400px) {
+    /* Scale down everything proportionally */
+    .header-left .logo-img {
+        height: 28px;
+    }
+
+    .icon-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 5px;
+    }
+
+    .icon-btn img {
+        width: 18px;
+        height: 18px;
+    }
+
+    /* Make the hamburger menu slightly smaller */
+    .hamburger {
+        width: 24px;
+        height: 16px;
+    }
+}
+
+/* Fix for ultra-narrow screens */
+@media (max-width: 350px) {
+    /* Even more compact layout */
+    .header-inner {
+        padding: 0 5px;
+    }
+
+    .header-left .logo-img {
+        height: 24px;
+    }
+
+    /* Minimal icon size while keeping usability */
+    .icon-btn {
+        width: 32px;
+        height: 32px;
+        margin-left: 4px;
+    }
+
+    .icon-btn img {
+        width: 16px;
+        height: 16px;
+    }
+}
+
