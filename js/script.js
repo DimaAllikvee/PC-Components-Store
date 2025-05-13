@@ -6,3 +6,11 @@ document.addEventListener('DOMContentLoaded', function() {
         nav.classList.toggle('active');
     });
 });
+
+
+    document.querySelector('.category-toggle')
+    .addEventListener('click', function() {
+    document.querySelector('.category-nav')
+        .classList.toggle('active');
+});
+
