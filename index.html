@@ -1,12 +1,12 @@
 <!doctype html>
 <html lang="en">
-<head >
+<head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PC-Components Store</title>
-    <script src="/js/script.js" defer></script>
+    <script src="./js/scriptmain.js" defer></script>
     <link rel="stylesheet" href="style.css"/>
     <link rel="icon" href="icons/favicon%20icon.png" type="image/x-icon">
 </head>
@@ -35,24 +35,16 @@
                 <li><a href="product.html" class="nav-link">Products</a></li>
                 <li><a href="about.html" class="nav-link">About</a></li>
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
-                <li><a href="#" class="nav-link">Shopping Cart</a></li>
+                <li><a href="shoppingcart.html" class="nav-link">Cart</a></li>
                 <li><a href="review.html" class="nav-link">Reviews</a></li>
             </ul>
         </nav>
 
         <!-- Иконки справа -->
         <div class="header-right">
-            <button class="icon-btn" aria-label="Search" id="search-toggle">
-                <img src="icons/search.svg" alt="Search">
+            <button class="icon-btn" aria-label="Search">
+                <img src="icons/search.svg" alt="">
             </button>
-            <!-- Само поле поиска: скрыто по-умолчанию -->
-            <input
-                    type="text"
-                    id="search-input"
-                    placeholder="Search..."
-                    aria-label="Search products"
-                    class="search-input"
-            />
             <button class="icon-btn" aria-label="Shopping Cart">
                 <img src="icons/cart_home.svg" alt="">
             </button>
@@ -63,49 +55,133 @@
 
     </div>
 </header>
+<section class="hero-section">
+    <h1 class="hero-title">Power Up Your World - Premium</h1>
+    <h2 class="hero-subtitle">Mobiles, Laptops, and PC Components</h2>
+    <p class="hero-description">
+        Discover a curated selection of the latest mobile devices, cutting-edge laptops, and high-performance PC components. Whether you're upgrading your gear or building from scratch, we bring you the best in technology to power your digital life.
+    </p>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const toggleBtn = document.getElementById('search-toggle');
-        const input    = document.getElementById('search-input');
-        const cards    = Array.from(document.querySelectorAll('.product-card'));
+    <div class="slider-container">
+        <div class="slider" id="product-slider">
+            <div class="product-card">
+                <div class="product-images">
+                    <img src="./images/home_images/9950x3d.png" alt="Intel Core i9 9950X3D">
+                </div>
+                <div class="product-name">AMD Ryzen 9 9950X3D</div>
+            </div>
 
-        // 1) Клик по лупе: открываем/закрываем <input>
-        toggleBtn.addEventListener('click', () => {
-            document.body.classList.toggle('search-open');
-            if (document.body.classList.contains('search-open')) {
-                input.focus();
-            } else {
-                input.value = '';
-                filterCards('');
-            }
-        });
+            <div class="product-card">
+                <div class="product-images">
+                    <img src="./images/home_images/Legion Pro 7i Gen 10 Intel.png" alt="Legion Pro 7i Gen 10 Intel">
+                </div>
+                <div class="product-name">Legion Pro 7i Gen 10 Intel</div>
+            </div>
 
-        // 2) Поиск по вводимому тексту
-        input.addEventListener('input', (e) => {
-            filterCards(e.target.value);
-        });
+            <div class="product-card">
+                <div class="product-images">
+                    <img src="./images/home_images/ROG Zephyrus G16.png" alt="ROG Zephyrus G16">
+                </div>
+                <div class="product-name">ROG Zephyrus G16</div>
+            </div>
 
-        function filterCards(query) {
-            const q = query.trim().toLowerCase();
-            cards.forEach(card => {
-                const name = card.querySelector('.product-name').textContent.toLowerCase();
-                // показываем, если совпадает, иначе — прячем
-                card.style.display = name.includes(q) ? '' : 'none';
-            });
-        }
+            <div class="product-card">
+                <div class="product-images">
+                    <img src="./images/home_images/4070s.png" alt="Asus GeForce RTX 4070">
+                </div>
+                <div class="product-name">GeForce RTX 5070 Ti </div>
+            </div>
 
-        // 3) Скрыть поиск, если кликнули вне поля и кнопки
-        document.addEventListener('click', (e) => {
-            if (!toggleBtn.contains(e.target) && !input.contains(e.target) && document.body.classList.contains('search-open')) {
-                document.body.classList.remove('search-open');
-                input.value = '';
-                filterCards('');
-            }
-        });
-    });
-</script>
+            <div class="product-card">
+                <div class="product-images">
+                    <img src="./images/home_images/AMD Ryzen 7 9800X3D.png" alt="AMD Ryzen 7 9800X3D">
+                </div>
+                <div class="product-name">AMD Ryzen 7 9800X3D</div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-images">
+                    <img src="./images/home_images/Apple iPhone 16 Pro Max.png" alt="Apple iPhone 16 Pro Max">
+                </div>
+                <div class="product-name">Apple iPhone 16 Pro Max</div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-images">
+                    <img src="./images/home_images/5070ti.png" alt="RTX 5080">
+                </div>
+                <div class="product-name">GeForce RTX 5070 Ti</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slider-controls">
+        <button class="slider-arrow" id="prev-btn">
+            <img src="./icons/left-arrow.svg" alt="Previous">
+        </button>
+        <button class="slider-arrow" id="next-btn">
+            <img src="./icons/right-arrow.svg" alt="Next">
+        </button>
+    </div>
+</section>
 
 
 </body>
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-top">
+            <div class="footer-logo">
+                <!-- Circuit Hub Logo -->
+                <img src="./icons/Group 19.png" alt="Circuit Hub Logo">
+            </div>
+
+            <div class="footer-nav">
+                <div class="nav-column">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-column">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="#">Mobiles</a></li>
+                        <li><a href="#">Laptop</a></li>
+                        <li><a href="#">PC Components</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Returns</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-newsletter">
+                <h3>Subscribe to our newsletter</h3>
+                <input type="email" placeholder="Email address">
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="social-icons">
+                <!-- Social Media Icons -->
+                <a href="#" class="social-icon">
+                    <img src="./icons/fa.svg" alt="Facebook">
+                </a>
+                <a href="#" class="social-icon">
+                    <img src="./icons/ins.svg" alt="Instagram">
+                </a>
+                <a href="#" class="social-icon">
+                    <img src="./icons/tw.svg" alt="Twitter">
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
 </html>
