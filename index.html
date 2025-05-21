@@ -35,15 +35,23 @@
                 <li><a href="about.html" class="nav-link">About</a></li>
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
                 <li><a href="#" class="nav-link">Shopping Cart</a></li>
-                <li><a href="#" class="nav-link">Reviews</a></li>
+                <li><a href="review.html" class="nav-link">Reviews</a></li>
             </ul>
         </nav>
 
         <!-- Иконки справа -->
         <div class="header-right">
-            <button class="icon-btn" aria-label="Search">
-                <img src="icons/search.svg" alt="">
+            <button class="icon-btn" aria-label="Search" id="search-toggle">
+                <img src="icons/search.svg" alt="Search">
             </button>
+            <!-- Само поле поиска: скрыто по-умолчанию -->
+            <input
+                    type="text"
+                    id="search-input"
+                    placeholder="Search..."
+                    aria-label="Search products"
+                    class="search-input"
+            />
             <button class="icon-btn" aria-label="Shopping Cart">
                 <img src="icons/cart_home.svg" alt="">
             </button>
@@ -54,6 +62,48 @@
 
     </div>
 </header>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const toggleBtn = document.getElementById('search-toggle');
+        const input    = document.getElementById('search-input');
+        const cards    = Array.from(document.querySelectorAll('.product-card'));
+
+        // 1) Клик по лупе: открываем/закрываем <input>
+        toggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('search-open');
+            if (document.body.classList.contains('search-open')) {
+                input.focus();
+            } else {
+                input.value = '';
+                filterCards('');
+            }
+        });
+
+        // 2) Поиск по вводимому тексту
+        input.addEventListener('input', (e) => {
+            filterCards(e.target.value);
+        });
+
+        function filterCards(query) {
+            const q = query.trim().toLowerCase();
+            cards.forEach(card => {
+                const name = card.querySelector('.product-name').textContent.toLowerCase();
+                // показываем, если совпадает, иначе — прячем
+                card.style.display = name.includes(q) ? '' : 'none';
+            });
+        }
+
+        // 3) Скрыть поиск, если кликнули вне поля и кнопки
+        document.addEventListener('click', (e) => {
+            if (!toggleBtn.contains(e.target) && !input.contains(e.target) && document.body.classList.contains('search-open')) {
+                document.body.classList.remove('search-open');
+                input.value = '';
+                filterCards('');
+            }
+        });
+    });
+</script>
 
 
 </body>
